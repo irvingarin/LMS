@@ -1,0 +1,43 @@
+[
+{ 
+ title:'Graduation',
+ start: new Date(2019, 06-1, 24),
+ end: new Date(2019, 06-1,24)
+ },{ 
+ title:'Graduation Ball',
+ start: new Date(2019, 06-1, 21),
+ end: new Date(2019, 06-1,21)
+ },{ 
+ title:'Baccalaureate Mass',
+ start: new Date(2019, 06-1, 20),
+ end: new Date(2019, 06-1,20)
+ },{ 
+ title:'Recognition Day',
+ start: new Date(2019, 06-1, 21),
+ end: new Date(2019, 06-1,21)
+ },{ 
+ title:'Rehearsal',
+ start: new Date(2019, 06-1, 19),
+ end: new Date(2019, 06-1,19)
+ },{ 
+ title:'Midterm Exam ',
+ start: new Date(2019, 05-1, 10),
+ end: new Date(2019, 05-1,13)
+ },{ 
+ title:'Campus Fest',
+ start: new Date(2019, 03-1, 25),
+ end: new Date(2019, 03-1,29)
+ },{ 
+ title:'Enrollment',
+ start: new Date(2019, 01-1, 07),
+ end: new Date(2019, 01-1,18)
+ },{ 
+ title:'Buwan ng Wika ',
+ start: new Date(2019, 08-1, 30),
+ end: new Date(2019, 08-1,30)
+ },{ 
+ title:'PSU Anniversary',
+ start: new Date(2019, 07-1, 01),
+ end: new Date(2019, 07-1,05)
+ },
+]
