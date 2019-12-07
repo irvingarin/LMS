@@ -49,8 +49,8 @@
 
 						  <tbody>
 						  	<?php 
-						  		$g = getAllSub();
-						  		while($gr = mysql_fetch_object($g)){
+						  		$g = getAllSub($conn);
+						  		while($gr = mysqli_fetch_object($g)){
 						  	?>
 						    <tr>
 						      <td><?=$gr->subj_code?></td>

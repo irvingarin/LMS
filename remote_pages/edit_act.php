@@ -6,7 +6,7 @@
   $problem="";
   $act_id = "";
   if(isset($_GET['actid'])){
-    $ar = mysql_fetch_object(getOneActivity($_GET['actid']));
+    $ar = mysqli_fetch_object(getOneActivity($_GET['actid'],$conn));
     $act_id=$_GET['actid'];
     $act_name=$ar->act_title;
     $problem=$ar->activities_desc;

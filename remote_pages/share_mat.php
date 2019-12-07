@@ -11,8 +11,8 @@
 			<select class="form-control" name="shareto[]" id="shareto" multiple="">
 				<option value='All'>All With Same Subject</option>
 				<?php 
-				$f = getFacSameCsub($_GET['esub']);
-				while($fr=mysql_fetch_object($f)){
+				$f = getFacSameCsub($_GET['esub'],$conn);
+				while($fr=mysqli_fetch_object($f)){
 					echo "<option value='$fr->id_no'>$fr->st_lname, $fr->st_fname</option>";
 				}
 				?>

@@ -1,6 +1,6 @@
 <?php 
-	$user = mysql_fetch_object(getDeanProg($_SESSION['lms_admin_']));
-	$feed = getFeed($user->prog_id);
+	$user = mysqli_fetch_object(getDeanProg($_SESSION['lms_admin_'],$conn));
+	$feed = getFeed($user->prog_id,$conn);
 	// echo "user ".$user->prog_id." ".$_SESSION['lms_admin_'];
 
 ?>
@@ -28,16 +28,16 @@
 									</thead>
 									<tbody>
 										<?php 
-											$d = facindept($user->prog_id);
-											while($dr=mysql_fetch_object($d)){
-												$cc = countFeed($dr->id_no);
+											$d = facindept($user->prog_id,$conn);
+											while($dr=mysqli_fetch_object($d)){
+												$cc = countFeed($dr->id_no,$conn);
 
 										?>
 										<tr>
 											<td><?=$dr->id_no?></td>
 											<td><?=ucfirst($dr->st_fname)?></td>
 											<td><?=$dr->status?></td>
-											<td><span class="badge badge-primary text-center"><?=mysql_num_rows($cc)?></span></td>
+											<td><span class="badge badge-primary text-center"><?=mysqli_num_rows($cc)?></span></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -51,8 +51,8 @@
 				<div class="container-fluid"  style="height: 500px; overflow-y: auto ">
 				<?php 
 					
-					while($feedRow = mysql_fetch_object($feed)){
-						$fa = mysql_fetch_object(allFbyID($feedRow->id_no));
+					while($feedRow = mysqli_fetch_object($feed)){
+						$fa = mysqli_fetch_object(allFbyID($feedRow->id_no,$conn));
 				?>
 				<div class="row">
 					<div class="col-md-12">

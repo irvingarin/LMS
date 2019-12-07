@@ -8,7 +8,7 @@
 		$btnN = "btn-saveF";
 	
 		if(isset($_GET['e'])){
-			$f=mysql_fetch_object(allFbyID($_GET['e']));
+			$f=mysqli_fetch_object(allFbyID($_GET['e'],$conn));
 			$idno = $f->id_no;
 			$fname = $f->st_fname;
 			$lname=$f->st_lname;
@@ -17,7 +17,7 @@
 			$btnV = "Update";
 			$btnN = "btn-upF";
 		}
-		$user = mysql_fetch_object(getDeanProg($_SESSION['lms_admin_']));
+		$user = mysqli_fetch_object(getDeanProg($_SESSION['lms_admin_'],$conn));
 
 ?>
 		<div class="row">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="md-form">
                             	<select class="form-control" name="txtdept">
-                            	<?php 	display_dept_by_id($user->prog_id) ?>
+                            	<?php 	display_dept_by_id($user->prog_id,$conn) ?>
                             	</select>
                             	<label for="txtid_no" class="font-weight-light active">Department *</label>
                             </div>
@@ -107,8 +107,8 @@
 
 						  <tbody>
 						  	<?php 
-						  		$g = allFaculty();
-						  		while($gr = mysql_fetch_object($g)){
+						  		$g = allFaculty($conn);
+						  		while($gr = mysqli_fetch_object($g)){
 						  	?>
 						    <tr>
 						      <td><?=$gr->id_no?></td>

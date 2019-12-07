@@ -12,10 +12,10 @@
         if($_GET['m']=="edit"){
             $btnName = "btnUpdateQuestion";
             $btnValue = "Update";
-            $ed=mysql_fetch_object(getQuestionByID($_GET['ques']));
+            $ed=mysqli_fetch_object(getQuestionByID($_GET['ques'],$conn));
             $question = $ed->question;
 
-            $k = mysql_fetch_object(getKey($_GET['ques']));
+            $k = mysqli_fetch_object(getKey($_GET['ques'],$conn));
             if($k->question_ans=="True"){
                 $strue="Selected='Selected'";
                 $sfalse="Selected=''";

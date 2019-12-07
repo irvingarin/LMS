@@ -1,7 +1,7 @@
 <?php session_start();
 include("../conn.php");
 include("../admin_fn.php");
-$user = mysql_fetch_object(getDeanProg($_SESSION['lms_admin_']));
+$user = mysqli_fetch_object(getDeanProg($_SESSION['lms_admin_'],$conn));
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,8 +60,8 @@ $user = mysql_fetch_object(getDeanProg($_SESSION['lms_admin_']));
 			</thead>
 			<tbody>
 				<?php 
-				$f = allfacultynomat($user->prog_id);
-				while($fr = mysql_fetch_object($f)){
+				$f = allfacultynomat($user->prog_id,$conn);
+				while($fr = mysqli_fetch_object($f)){
 					$name =$fr->st_lname.", ". $fr->st_fname
 				?>
 				<tr>

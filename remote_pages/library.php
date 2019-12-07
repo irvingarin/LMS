@@ -33,7 +33,7 @@
                                                                         <?php 
                                                                             $sm = getAllModules1($id_no,$conn);
                                                                             while($smr =  mysqli_fetch_object($sm)){
-                                                                                $cr =mysqli_fetch_object(class_by_id($smr->class_id));
+                                                                                $cr =mysqli_fetch_object(class_by_id($smr->class_id,$conn));
                                                                         ?>
                                                                         <tr>
                                                                             <td><?=$smr->mod_title?></td>

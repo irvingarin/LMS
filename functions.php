@@ -140,12 +140,12 @@
 		return $s;
 	}
 
-	function getFacSameCsub($class_id){
-		$m = mysql_fetch_object(class_by_id($class_id));
+	function getFacSameCsub($class_id,$conn){
+		$m = mysqli_fetch_object(class_by_id($class_id,$conn));
 		$acadid = getActiveAcad($conn);
 		// $s = mysql_query("SELECT * FROM lms_members WHERE id_no in (SELECT id_no FROM lms_class WHERE (subject_code='$m->subject_code' and acad_id='$acadid')  and (id_no != '".$_SESSION['lms_m_id_no']."'))");
 		// select * from lms_members where id_no in (SELECT id_no from lms_class where subject_code='IT 214' AND acad_id='2' and id_no !='BAYA-00211')
-		$s = mysql_query("SELECT * from lms_members where id_no in (SELECT id_no from lms_class where subject_code='$m->subject_code' AND acad_id='$acadid' and id_no !='".$_SESSION['lms_m_id_no']."')");
+		$s = mysqli_query($conn,"SELECT * from lms_members where id_no in (SELECT id_no from lms_class where subject_code='$m->subject_code' AND acad_id='$acadid' and id_no !='".$_SESSION['lms_m_id_no']."')");
 		return $s;
 	}
 
@@ -377,13 +377,13 @@
 		return $s;
 	}
 
-	function getAssbyID($ass_id){
-		$s = mysql_query("SELECT * FROM lms_assignment WHERE ass_id='$ass_id'");
+	function getAssbyID($ass_id,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_assignment WHERE ass_id='$ass_id'");
 		return $s;
 	}
 
-	function getAllSubmisions($ass_id){
-		$s = mysql_query("SELECT * FROM lms_ass_sub WHERE ass_id='$ass_id'");
+	function getAllSubmisions($ass_id,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_ass_sub WHERE ass_id='$ass_id'");
 		return $s;
 	}
 	function getAllMyAssignment($ass_id,$id_no,$conn){
@@ -480,7 +480,7 @@
 		return $s;
 	}
 
-	function getQuestionByID($ques_id){
+	function getQuestionByID($ques_id,$conn){
 		$s = mysqli_query($conn,"SELECT * FROM lms_quiz_questions WHERE question_id='$ques_id'")or die(mysql_error());
 		return $s;
 	}

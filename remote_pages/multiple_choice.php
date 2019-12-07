@@ -13,12 +13,12 @@
 		if($_GET['m']=="edit"){
 			$btnName = "btnUpdateQuestion";
 			$btnValue = "Update";
-			$ed=mysql_fetch_object(getQuestionByID($_GET['ques']));
+			$ed=mysqli_fetch_object(getQuestionByID($_GET['ques'],$conn));
 			$question = $ed->question;
 			$x = 0;
-			$cc = getChoises($_GET['ques']);
+			$cc = getChoises($_GET['ques'],$conn);
 			
-			$k = mysql_fetch_object(getKey($_GET['ques']));
+			$k = mysqli_fetch_object(getKey($_GET['ques'],$conn));
 			$ans=$k->question_ans;
 		}
 	}
@@ -39,7 +39,7 @@
         <div class="responses">
         	<?php 
         		$ch = "A";
-        		while($choice = mysql_fetch_object($cc)){
+        		while($choice = mysqli_fetch_object($cc)){
 					// $x++;
 					// if($x==1){
 					// 	$option1=$choice->choices;	

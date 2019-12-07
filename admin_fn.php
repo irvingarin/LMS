@@ -27,8 +27,8 @@
 	// 	$r = mysql_query("DELETE from lms_settings WHERE setting_id='$set_id'");
 	// 	return $r;
 	// }
-	function lms_insert($tbl,$values){
-		$i = mysql_query("INSERT into $tbl values ($values)");
+	function lms_insert($tbl,$values,$conn){
+		$i = mysqli_query($conn,"INSERT into $tbl values ($values)");
 		return $i;
 	}
 
@@ -195,9 +195,9 @@
 			// }
 		// }
 	}
-	function collegeHasDean($prog_id){
-		$s = mysql_query("SELECT count(*) bilang FROM lms_deans WHERE prog_id='$prog_id'");
-		$m = mysql_fetch_object($s);
+	function collegeHasDean($prog_id,$conn){
+		$s = mysqli_query($conn,"SELECT count(*) bilang FROM lms_deans WHERE prog_id='$prog_id'");
+		$m = mysqli_fetch_object($s);
 		return $m->bilang;
 	}
 	function ifExistDean($fname,$lname,$mname,$prog,$conn){
@@ -231,23 +231,23 @@
 	}
 
 
-	function getDeanByKey($key){
-		$s = mysql_query("SELECT * FROM lms_deans where dean_name like '$key%'");
+	function getDeanByKey($key,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_deans where dean_name like '$key%'");
 		return $s;
 	}
 
-	function inSubjects($sc, $sd){
-		$i = mysql_query("INSERT into lms_subjects values('','$sc','$sd','Active')");
+	function inSubjects($sc, $sd,$conn){
+		$i = mysqli_query($conn,"INSERT into lms_subjects values('','$sc','$sd','Active')");
 		return $i;
 	}
 
-	function getAllSub(){
-		$s = mysql_query("SELECT * FROM lms_subjects");
+	function getAllSub($conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_subjects");
 		return $s;
 	}
 
-	function inEvent($en, $ed, $es, $ee){
-		$i = mysql_query("INSERT into lms_events values('','$en','$ed','$es','$ee','Active')");
+	function inEvent($en, $ed, $es, $ee,$conn){
+		$i = mysqli_query($conn,"INSERT into lms_events values('','$en','$ed','$es','$ee','Active')");
 		return $i;
 	}
 
@@ -296,8 +296,8 @@
 			$s = mysqli_query($conn,"SELECT * FROM lms_members where id_no in (SELECT id_no from lms_faculty_tag WHERE dept_code in(SELECT dept_code from lms_departments WHERE prog_id='$prog_id'))");
 			return $s;
 	}
-	function allActiveFaculty(){
-			$s = mysql_query("SELECT * FROM lms_members WHERE id_no like '%BAYA%' and status='Active'")or die(mysql_error());
+	function allActiveFaculty($conn){
+			$s = mysqli_query($conn,"SELECT * FROM lms_members WHERE id_no like '%BAYA%' and status='Active'")or die(mysql_error());
 			return $s;
 	}
 	function allFacultyByID($id_no,$conn){
@@ -346,16 +346,16 @@
 		return $s;
 
 	}
-	function allfacultynomat($prog_id){
-		$s = mysql_query("SELECT * FROM lms_members where id_no like 'BAYA%' and id_no not in(SELECT id_no FROM lms_class WHERE class_id not in (SELECT class_id FROM class_modules)) and id_no in(SELECT id_no FROM lms_faculty_tag WHERE dept_code in (SELECT dept_code FROM lms_departments WHERE prog_id='$prog_id'))") or die(mysql_error());
+	function allfacultynomat($prog_id,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_members where id_no like 'BAYA%' and id_no not in(SELECT id_no FROM lms_class WHERE class_id not in (SELECT class_id FROM class_modules)) and id_no in(SELECT id_no FROM lms_faculty_tag WHERE dept_code in (SELECT dept_code FROM lms_departments WHERE prog_id='$prog_id'))") or die(mysql_error());
 		return $s;
 	}
-	function getFeed($prog_id){
-		$s = mysql_query("SELECT * FROM lms_feed WHERE id_no in (SELECT id_no FROM lms_members WHERE id_no in (SELECT id_no FROM lms_faculty_tag WHERE dept_code in (SELECT dept_code FROM lms_departments WHERE prog_id='$prog_id'))) order by date_added desc");
+	function getFeed($prog_id,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_feed WHERE id_no in (SELECT id_no FROM lms_members WHERE id_no in (SELECT id_no FROM lms_faculty_tag WHERE dept_code in (SELECT dept_code FROM lms_departments WHERE prog_id='$prog_id'))) order by date_added desc");
 		return $s;
 	}
-	function countFeed($id_no){
-		$s = mysql_query("SELECT * FROM lms_feed WHERE id_no in (SELECT id_no FROM lms_members WHERE id_no ='$id_no') order by date_added desc");
+	function countFeed($id_no,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_feed WHERE id_no in (SELECT id_no FROM lms_members WHERE id_no ='$id_no') order by date_added desc");
 		return $s;
 	}
 
@@ -364,8 +364,8 @@
 		return $d;
 	}
 
-	function facindept($prog_id){
-		$s = mysql_query("SELECT * FROM lms_members WHERE id_no in (SELECT id_no FROM lms_faculty_tag WHERE dept_code in (SELECT dept_code FROM lms_departments WHERE prog_id='$prog_id'))");
+	function facindept($prog_id,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_members WHERE id_no in (SELECT id_no FROM lms_faculty_tag WHERE dept_code in (SELECT dept_code FROM lms_departments WHERE prog_id='$prog_id'))");
 		return $s;
 	}
 	function allFbyID($eno,$conn){
@@ -385,46 +385,46 @@
 			
 	}
 
-	function inParents($fn,$ln,$mi,$un,$pw){
-			$i = mysql_query("INSERT into lms_parents values('','$fn','$ln','$mi','$un','$pw','Active')");
+	function inParents($fn,$ln,$mi,$un,$pw,$conn){
+			$i = mysqli_query($conn,"INSERT into lms_parents values('','$fn','$ln','$mi','$un','$pw','Active')");
 			return $i;
 	}
-	function allParents(){
-			$s = mysql_query("SELECT * FROM lms_parents");
+	function allParents($conn){
+			$s = mysqli_query($conn,"SELECT * FROM lms_parents");
 			return $s;
 	}
 
-	function inSyllabus($mt,$md,$aid,$mf,$mty){
-			$i = mysql_query("INSERT into lms_materials values('','$mt','$md','$aid',now(),0,'$mf','$mty')");
+	function inSyllabus($mt,$md,$aid,$mf,$mty,$conn){
+			$i = mysqli_query($conn,"INSERT into lms_materials values('','$mt','$md','$aid',now(),0,'$mf','$mty')");
 			return $i;
 	}
 
-	function allSyllabus(){
-			$s = mysql_query("SELECT * FROM lms_materials");
+	function allSyllabus($conn){
+			$s = mysqli_query($conn,"SELECT * FROM lms_materials");
 			return $s;
 	}
 
-	function authAdmin($u, $p){
-		$s = mysql_query("SELECT * FROM lms_admin WHERE adm_uname = '$u' and a_pass='$p' and adm_uname in(SELECT username from lms_deans WHERE status='Active')");
+	function authAdmin($u, $p,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_admin WHERE adm_uname = '$u' and a_pass='$p' and adm_uname in(SELECT username from lms_deans WHERE status='Active')");
 		return $s;
 	}
 
-	function adChild($stno,$pid){
-		$i = mysql_query("INSERT into lms_child values('','$stno','$pid')");
+	function adChild($stno,$pid,$conn){
+		$i = mysqli_query($conn,"INSERT into lms_child values('','$stno','$pid')");
 		return $i;
 	}
-	function getChilds($pid){
-		$s = mysql_query("SELECT * FROM lms_child WHERE parent_id='$pid'");
+	function getChilds($pid,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_child WHERE parent_id='$pid'");
 		return $s;
 	}
 
-	function addAcad($sy, $sem){
+	function addAcad($sy, $sem,$conn){
 		
-		$exist = ifExisteAcad($sy, $sem);
+		$exist = ifExisteAcad($sy, $sem,$conn);
 		if($exist==0){
-			autoDeactivate();
+			autoDeactivate($conn);
 			$sys = $sy."-".$sem;
-			$i = mysql_query("INSERT into lms_acad_settings VALUES('','$sy', '$sem','$sys','Active')");
+			$i = mysqli_query($conn,"INSERT into lms_acad_settings VALUES('','$sy', '$sem','$sys','Active')");
 			return $i;
 		}else{
 			return false;
@@ -432,9 +432,9 @@
 
 	}
 
-	function ifExisteAcad($sy, $sem){
-		$s = mysql_query("SELECT * FROM lms_acad_settings WHERE school_year='$sy' and semester='$sem'");
-		return mysql_num_rows($s);
+	function ifExisteAcad($sy, $sem,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_acad_settings WHERE school_year='$sy' and semester='$sem'");
+		return mysqli_num_rows($s);
 	}
 
 	function allAcad($conn){
@@ -507,12 +507,12 @@
 		    $myfile = file_put_contents('event.txt', $txt.PHP_EOL);
 	}
 
-	function verifyChangePass($user,$pass){
-		$s = mysql_query("SELECT * FROM lms_admin WHERE adm_uname='$user' and a_pass='$pass'" );
+	function verifyChangePass($user,$pass,$conn){
+		$s = mysqli_query($conn,"SELECT * FROM lms_admin WHERE adm_uname='$user' and a_pass='$pass'" );
 		return mysql_num_rows($s);
 	}
-	function AdminchangePassword($user,$cpass){
-		$s = mysql_query("UPDATE lms_admin SET a_pass='$cpass' WHERE adm_uname='$user'");
+	function AdminchangePassword($user,$cpass,$conn){
+		$s = mysqli_query($conn,"UPDATE lms_admin SET a_pass='$cpass' WHERE adm_uname='$user'");
 		return $s;
 	}
 ?>

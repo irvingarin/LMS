@@ -4,7 +4,7 @@
 
 if(isset($_GET['cid'])){
 
-  $r = allQuizByStudent($_GET['id_no'],$_GET['cid']);
+  $r = allQuizByStudent($_GET['id_no'],$_GET['cid'],$conn);
 
 
 ?>
@@ -20,14 +20,14 @@ if(isset($_GET['cid'])){
       </thead>
       <tbody>
         <?php 
-        while($rr = mysql_fetch_object($r)){
+        while($rr = mysqli_fetch_object($r)){
 
         ?>
           <tr>
             <td><?=$rr->date_added?></td>
             <td><?=$rr->quiz_title?></td>
-            <td><?=countQItems($rr->quiz_id)?></td>
-            <td><?=coutCorrect($rr->quiz_id, $_GET['id_no'])?></td>
+            <td><?=countQItems($rr->quiz_id,$conn)?></td>
+            <td><?=coutCorrect($rr->quiz_id, $_GET['id_no'],$conn)?></td>
           </tr>
         <?php } ?>
       </tbody>

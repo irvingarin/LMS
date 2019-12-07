@@ -84,7 +84,7 @@
                                         <li><small>
 
                                           <?php
-                                            if(mysql_num_rows($myass)!=0){
+                                            if(mysqli_num_rows($myass)!=0){
                                                  echo "<a href='#' data-remote='remote_pages/myass.php?as_id=$dr->ass_id' style='color:#c0c0c0' class='poop btn btn-primary btn-sm btn-rounded' title='My Assignment'><i class='fa fa-eye'></i></a>";
                                             }
                                            ?>
@@ -121,7 +121,7 @@
 </div>
   <?php }
   }else{
-    $dr=mysql_fetch_object(getAssbyID($_GET['v']));
+    $dr=mysqli_fetch_object(getAssbyID($_GET['v']),$conn);
  ?>
 <div class="row">
   <div class="card max-width">
@@ -152,7 +152,7 @@
 </div>
 <?php  
     $ms = "";
-    $ss = getAllSubmisions($_GET['v']);
+    $ss = getAllSubmisions($_GET['v'],$conn);
 
 ?>
 <div class="row">
@@ -164,7 +164,7 @@
     <div class="card-body">
         <?php 
        
-        if(mysql_num_rows($ss)==0){
+        if(mysqli_num_rows($ss)==0){
             echo "<p class='text-danger'>No records found.</p>";
         }else{
             //$ms = mysql_num_rows($ss);
@@ -182,9 +182,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                     <?php while($ssr = mysql_fetch_object($ss)){ 
-                           $mem = getMemberByid_no($ssr->id_no);
-                           $mr = mysql_fetch_object($mem);
+                     <?php while($ssr = mysqli_fetch_object($ss)){ 
+                           $mem = getMemberByid_no($ssr->id_no,$conn);
+                           $mr = mysqli_fetch_object($mem);
                            $path = "classes/ass_".$_GET['v']."/".$ssr->filename;
                       ?>
                     <tr>

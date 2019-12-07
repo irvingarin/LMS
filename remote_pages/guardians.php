@@ -1,5 +1,5 @@
 <?php 
-  $gg = getGuardians($_SESSION['lms_m_id_no']);
+  $gg = getGuardians($_SESSION['lms_m_id_no'],$conn);
 ?>
   <div class="row">
                             <div class="card max-width">
@@ -18,7 +18,7 @@
                                     </thead>
                                     <tbody>
                                       <?php 
-                                        while($ggr =mysql_fetch_object($gg)){
+                                        while($ggr =mysqli_fetch_object($gg)){
                                           $name = $ggr->lname.", ".$ggr->fname." ".$ggr->mname;
                                       ?>
                                         <tr>

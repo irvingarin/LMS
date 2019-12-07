@@ -64,8 +64,8 @@
 
 						  <tbody>
 						  	<?php 
-						  		$g = allSyllabus();
-						  		while($gr = mysql_fetch_object($g)){
+						  		$g = allSyllabus($conn);
+						  		while($gr = mysqli_fetch_object($g)){
 						  	?>
 						    <tr>
 						      <td><?=$gr->mat_title?></td>

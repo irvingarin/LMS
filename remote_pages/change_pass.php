@@ -48,8 +48,8 @@
                         
                         <?php 
                         }else{
-                            $mdr = viewModule($_GET['mod_view']);
-                            viewPlusOne($_GET['mod_view']);
+                            $mdr = viewModule($_GET['mod_view'],$conn);
+                            viewPlusOne($_GET['mod_view'],$conn);
                             ?>
                         <div class="row">
                             <div class="card max-width">

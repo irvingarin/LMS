@@ -6,7 +6,7 @@
     $deadline = "";
     $time = "";
     if(isset($_GET['e'])){
-      $a = mysql_fetch_object(getAssbyID($_GET['e']));
+      $a = mysqli_fetch_object(getAssbyID($_GET['e'],$conn));
 
       $title = $a->ass_title;
       $desc = $a->ass_desc;

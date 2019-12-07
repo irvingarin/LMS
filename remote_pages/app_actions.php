@@ -11,7 +11,7 @@
 				$username = sanitize($_POST['un']);
 				$pw = sanitize($_POST['pw']);
 
-				$n = lms_register($id_no, $fname, $lname, $mi, $username, $pw);
+				$n = lms_register($id_no, $fname, $lname, $mi, $username, $pw,$conn);
 				$res = "";
 					$res='{"res":"'.$n.'"}';
 				header("Content-Type: application/json");

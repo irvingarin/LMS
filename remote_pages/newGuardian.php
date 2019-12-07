@@ -8,7 +8,7 @@
   $btnName = "btnNguard";
   $btnValue = "Add";
   if(isset($_GET['m'])){
-      $g = mysql_fetch_object(getGuardiansID($_GET['i']));
+      $g = mysqli_fetch_object(getGuardiansID($_GET['i'],$conn));
       $fname = $g->fname;
       $lname = $g->lname;
       $mname = $g->mname;

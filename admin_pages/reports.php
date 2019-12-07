@@ -1,6 +1,6 @@
 <?php 
-	$classes =getFclass();
-	$user = mysql_fetch_object(getDeanProg($_SESSION['lms_admin_']));
+	$classes =getFclass($conn);
+	$user = mysqli_fetch_object(getDeanProg($_SESSION['lms_admin_'],$conn));
 ?>
 		<div class="row">
 			<!-- <div class="col-md-4">
@@ -38,8 +38,8 @@
 
 						  <tbody>
 						  	<?php 
-						  		$g = allfacultynomat($user->prog_id);
-						  		while($gr = mysql_fetch_object($g)){
+						  		$g = allfacultynomat($user->prog_id,$conn);
+						  		while($gr = mysqli_fetch_object($g)){
 						  	?>
 						    <tr>
 						      <td><?=$gr->id_no?></td>

@@ -80,8 +80,8 @@
 
 						  <tbody>
 						  	<?php 
-						  		$g = allParents();
-						  		while($gr = mysql_fetch_object($g)){
+						  		$g = allParents($conn);
+						  		while($gr = mysqli_fetch_object($g)){
 						  	?>
 						    <tr>
 						      <td><?=$gr->username?></td>
