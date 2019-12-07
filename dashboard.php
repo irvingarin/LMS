@@ -76,6 +76,7 @@
             <a href="#" data-activates="side-out" class="button-collapse"><i class="fa fa-bars fa-fw white-text fa-2x"></i></a>
         </div>-->
             <div class="wrapper"><a href="dashboard.php" class="navbar-brand text-white"> <img src="img/logo2-white.svg" width="35px"> PSU-LMS</a></div>
+            <a href="?g=out" class="class-li text-white" data-activity="Logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
         </div>
     </nav>
   
@@ -152,7 +153,6 @@
                         <hr />    
                         <ul class="list-group"> 
                             <li class="list-group-item"><a href="?s=settings&k=password" class="class-li" data-activity="Account Settings"><i class="fa fa-cog fa-fw"></i>Account Settings</a></li>
-                           <li class="list-group-item"><a href="?g=out" class="class-li" data-activity="Logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
                         </ul>
                         <?php 
                             if(isset($_GET['mod_view'])){

@@ -160,8 +160,8 @@
     aria-expanded="false"><i class="fa fa-cog fa-fw"></i></a>
                                         <div class="dropdown-menu color-box">
                                             <?php 
-                                                $color = gerAllColors();
-                                                while($color_r = mysql_fetch_object($color)){
+                                                $color = gerAllColors($conn);
+                                                while($color_r = mysqli_fetch_object($color)){
                                             ?>
                                             <a class="dropdown-item" href="#"><div class="color-box-item" style="background-color: <?=$color_r->hexvalue?>"></div></a>
                                         <?php } ?>
@@ -191,8 +191,8 @@
                                         <tbody>
                                             <?php 
                                                 if(isset($_GET['ch'])){
-                                                $cla = getMyClass($_GET['ch']);
-                                                while($clr = mysql_fetch_object($cla)){
+                                                $cla = getMyClass($_GET['ch'],$conn);
+                                                while($clr = mysqli_fetch_object($cla)){
                                             ?>
                                             <tr>
                                                 <td><?=$clr->subject_code?></td>

@@ -6,9 +6,9 @@
 	}
 	if(isset($_GET['x'])){
 		$member_id = $_SESSION['lms_m_id_no'];
-		$act = getOneActivity($_GET['x']);
-		$count = mysql_num_rows($act);
-		$actrow = mysql_fetch_object($act);
+		$act = getOneActivity($_GET['x'],$conn);
+		$count = mysqli_num_rows($act);
+		$actrow = mysqli_fetch_object($act);
 		if($count==0){
 			header("Location:dashboard.php?");
 		}
@@ -21,9 +21,9 @@
 
 	if(isset($_GET['f'])){
 		$folder_name = $_GET['f'];
-		$act = getOneActivity($_GET['e']);
-		$count = mysql_num_rows($act);
-		$actrow = mysql_fetch_object($act);
+		$act = getOneActivity($_GET['e'],$conn);
+		$count = mysqli_num_rows($act);
+		$actrow = mysqli_fetch_object($act);
 		$_SESSION['lms_folder_name'] = $folder_name;
 	}
 	
